@@ -51,7 +51,7 @@ const projects = [
     img: "/projects/myprofilewebsite.png",
     desc: "A portfolio website showcasing projects and skills. Built with HTML, CSS and JavaScript.",
     techs: ["HTML", "CSS", "JavaScript"],
-    live: "https://example.com/client-portfolio",
+    live: "https://codewithjoee.github.io/MyWebsiteProfile/",
   },
   {
     title: "Sample Portfolio Website Project",
@@ -59,7 +59,7 @@ const projects = [
     img: "/projects/profilewebsite.jpg",
     desc: "A sample profile website showcasing projects, about, education, experience, and skills.",
     techs: ["HTML", "CSS", "JavaScript"],
-    live: "https://example.com/sample-portfolio",
+    live: "https://codewithjoee.github.io/WebsiteProfile2.0/",
   },
   {
     title: "OBI Services Corporate Website",
