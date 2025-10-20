@@ -1,6 +1,7 @@
 // src/Section/Projects.jsx
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import MetricCard from "../components/MetricCard";
 
 const STATUS_STYLES = {
   Completed: "bg-emerald-600/15 text-emerald-300 border border-emerald-400/20",
@@ -72,7 +73,16 @@ const projects = [
 
 export default function Projects() {
   const [page, setPage] = useState(1);
-  const pageSize = 2; // 👈 show 2 cards per page
+  const pageSize = 2;
+
+  // ✅ project stats for MetricCards
+  const totals = useMemo(() => {
+    const total = projects.length;
+    const completed = projects.filter((p) => p.status === "Completed").length;
+    const live = projects.filter((p) => p.status === "Live").length;
+    const ongoing = projects.filter((p) => p.status === "Ongoing").length;
+    return { total, completed, live, ongoing };
+  }, []);
 
   const totalPages = Math.ceil(projects.length / pageSize);
   const start = (page - 1) * pageSize;
@@ -86,6 +96,14 @@ export default function Projects() {
     <div>
       <h2 className="text-2xl md:text-3xl font-bold">Projects</h2>
 
+      {/* ✅ Stats row (animated MetricCards) */}
+      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <MetricCard kpi={`${totals.total}`} label="Total" />
+        <MetricCard kpi={`${totals.completed}`} label="Completed" />
+        <MetricCard kpi={`${totals.live}`} label="Live" />
+        <MetricCard kpi={`${totals.ongoing}`} label="Ongoing" />
+      </div>
+
       {/* Cards */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -94,7 +112,7 @@ export default function Projects() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.22, ease: "easeOut" }}
-          className="mt-4 grid gap-6 sm:grid-cols-2" // 1 on mobile, 2 side-by-side otherwise
+          className="mt-4 grid gap-6 sm:grid-cols-2"
         >
           {pageItems.map((p) => (
             <ProjectCard key={p.title} {...p} />
@@ -102,7 +120,7 @@ export default function Projects() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Pagination */}
+      {/* Pagination (unchanged) */}
       <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <p className="text-sm opacity-80">
           Showing <strong>{start + 1}</strong>–
