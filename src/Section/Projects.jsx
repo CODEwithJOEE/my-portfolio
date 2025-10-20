@@ -27,7 +27,7 @@ const projects = [
     img: "/projects/Coffee-Shop.jpg",
     desc: "A business site for a coffee shop with menu pages and basic ordering forms. Built with PHP, JavaScript, HTML & CSS. Data stored in MySQL.",
     techs: ["PHP", "JavaScript", "MySQL"],
-    live: "https://example.com/coffee-shop",
+    live: "https://github.com/CODEwithJOEE",
   },
   {
     title: "Milk Tea Shop Website",
@@ -35,7 +35,7 @@ const projects = [
     img: "/projects/Boba-Bliss.avif",
     desc: "Brand website for a milk tea shop including product catalog and contact form. Built with PHP, JavaScript, HTML & CSS with a MySQL database.",
     techs: ["PHP", "JavaScript", "MySQL"],
-    live: "https://example.com/milktea",
+    live: "https://github.com/CODEwithJOEE",
   },
   {
     title: "Disaster Master 2.0 (Kotlin)",
@@ -43,7 +43,7 @@ const projects = [
     img: "/projects/Disaster-Master.png",
     desc: "A Kotlin app showing disasters… Tagalog/English/Bisaya support and before/after videos.",
     techs: ["Kotlin", "SQLite"],
-    live: "https://example.com/disaster-master",
+    live: "https://github.com/CODEwithJOEE",
   },
   {
     title: "Client Portfolio Website Project",
