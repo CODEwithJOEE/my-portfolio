@@ -40,7 +40,7 @@ export default function Sidebar({ onSelectContact }) {
       </div>
 
       <h2 className="mt-4 text-2xl md:text-3xl font-bold">
-        Hi, I’m <span className="text-emerald-400">Joemarie</span> 👋
+        Hi, I’m <span className="text-blue-500">Joemarie</span> 👋
       </h2>
 
       <p className="mt-2 text-sm md:text-base opacity-90 leading-relaxed">
@@ -83,7 +83,7 @@ export default function Sidebar({ onSelectContact }) {
           <Linkedin size={16} /> LinkedIn
         </a>
         <a
-          href="https://facebook.com/"
+          href="https://www.facebook.com/joemarie.amante.ronday/"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-sm hover:bg-white/5"
