@@ -83,7 +83,7 @@ export default function Sidebar({ onSelectContact }) {
           <Linkedin size={16} /> LinkedIn
         </a>
         <a
-          href="https://www.facebook.com/joemarie.amante.ronday/"
+          href={profile.links.facebook}
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-sm hover:bg-white/5"
