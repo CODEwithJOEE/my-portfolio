@@ -44,9 +44,17 @@ const items = [
 ];
 
 const ROLE_BADGE = {
-  "OJT Trainee": "bg-slate-500/10 text-slate-200 border border-white/10",
-  "Web Developer": "bg-sky-500/10 text-sky-200 border border-sky-400/20",
-  Staff: "bg-emerald-500/10 text-emerald-200 border border-emerald-400/20",
+  "OJT Trainee":
+    "bg-slate-600 text-white shadow-sm ring-1 ring-black/10 " +
+    "dark:bg-slate-500 dark:text-white dark:ring-white/15",
+
+  "Web Developer":
+    "bg-sky-600 text-white shadow-sm ring-1 ring-black/10 " +
+    "dark:bg-sky-500 dark:text-white dark:ring-white/15",
+
+  Staff:
+    "bg-emerald-600 text-white shadow-sm ring-1 ring-black/10 " +
+    "dark:bg-emerald-500 dark:text-white dark:ring-white/15",
 };
 
 export default function Experience() {

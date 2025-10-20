@@ -20,7 +20,7 @@ export default function Header({
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Close on Escape
+  // Close on Escape key
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && setOpen(false);
@@ -32,7 +32,15 @@ export default function Header({
   const brandRest = brand.split(" ").slice(1).join(" ");
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-slate-900/60 bg-slate-900/60 text-slate-100 border-b border-white/10">
+    <header
+      className="
+      sticky top-0 z-40 backdrop-blur
+      supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-900/60
+      bg-white/90 dark:bg-slate-900/60
+      text-slate-900 dark:text-slate-100
+      border-b border-slate-200 dark:border-white/10
+    "
+    >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Brand (click goes to About) */}
@@ -47,12 +55,13 @@ export default function Header({
             {brandFirst} <span className="font-extrabold">{brandRest}</span>
           </button>
 
-          {/* Desktop nav */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             {pages.map((p) => (
               <button
                 key={p.id}
                 onClick={() => onSelect(p.id)}
+                aria-current={active === p.id ? "page" : undefined}
                 className={`transition hover:opacity-90 ${
                   active === p.id
                     ? "font-semibold underline underline-offset-4"
@@ -64,21 +73,23 @@ export default function Header({
             ))}
           </nav>
 
-          {/* Right actions */}
+          {/* Right Actions */}
           <div className="flex items-center gap-2">
-            {/* Theme toggle */}
+            {/* Theme Toggle */}
             <button
               onClick={onToggleTheme}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 hover:bg-white/5 transition"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition"
               aria-label="Toggle theme"
               title="Toggle theme"
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            {/* Mobile menu toggle */}
+            {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 hover:bg-white/5 transition"
+              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-xl
+               border border-slate-200 dark:border-white/10
+               hover:bg-black/5 dark:hover:bg-white/5 transition"
               onClick={() => setOpen((o) => !o)}
               aria-label="Toggle menu"
               aria-expanded={open}
@@ -89,14 +100,14 @@ export default function Header({
           </div>
         </div>
 
-        {/* Mobile nav panel */}
+        {/* Mobile Navigation Panel */}
         <div
           id="mobile-nav"
           className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-200 ${
             open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="mt-2 rounded-2xl border border-white/10 bg-slate-900/70">
+          <div className="mt-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/70">
             <ul className="py-2">
               {pages.map((p) => (
                 <li key={p.id}>
@@ -105,9 +116,14 @@ export default function Header({
                       onSelect(p.id);
                       setOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-3 text-sm transition hover:bg-white/5 ${
-                      active === p.id ? "font-semibold" : "opacity-90"
-                    }`}
+                    aria-current={active === p.id ? "page" : undefined}
+                    className={`w-full text-left px-4 py-3 text-sm transition
+                                hover:bg-black/5 dark:hover:bg-white/5
+                                ${
+                                  active === p.id
+                                    ? "font-semibold"
+                                    : "opacity-90"
+                                }`}
                   >
                     {p.label}
                   </button>
