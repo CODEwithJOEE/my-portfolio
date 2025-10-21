@@ -73,7 +73,7 @@ const projects = [
   },
   {
     title: "Client Portfolio Website Project",
-    status: "Completed",
+    status: "Live",
     img: "/projects/myprofilewebsite.png",
     desc: "A portfolio website showcasing projects and skills. Built with HTML, CSS and JavaScript.",
     techs: ["HTML", "CSS", "JavaScript"],
