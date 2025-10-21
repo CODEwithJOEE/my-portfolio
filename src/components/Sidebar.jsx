@@ -70,7 +70,7 @@ export default function Sidebar({ onSelectContact }) {
 
       {/* Typing line */}
       <p className="mt-4 text-base md:text-lg">
-        Web Developer specializing in{" "}
+        Specializing in{" "}
         <span
           className={`font-semibold transition-colors duration-300 dark:drop-shadow-[0_0_4px_rgba(255,255,255,0.35)] ${
             TECH_COLORS[typed] || "text-sky-500 dark:text-sky-300"

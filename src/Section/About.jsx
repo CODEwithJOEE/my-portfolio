@@ -6,7 +6,7 @@ export default function About({ onNavigate }) {
     <div className="space-y-6">
       <header>
         <h2 className="text-2xl md:text-3xl font-bold">About</h2>
-        <p className="mt-2 text-slate-300 dark:text-slate-300/90 text-base">
+        <p className="mt-2 text-slate-600 dark:text-slate-300/90 text-base">
           Turning ideas into high-performance websites and apps that work
           anywhere.
         </p>
@@ -51,15 +51,6 @@ export default function About({ onNavigate }) {
         <MetricCard kpi="3+" label="Years Experience" />
         <MetricCard kpi="10+" label="Projects Shipped" />
         <MetricCard kpi="5+" label="Happy Clients" />
-      </section>
-
-      {/* Currently */}
-      <section className="space-y-3">
-        <h3 className="text-lg font-semibold">Currently</h3>
-        <p className="leading-relaxed">
-          Exploring better content architectures in WordPress, sharpening React
-          skills, and helping local businesses modernize their sites.
-        </p>
       </section>
 
       {/* CTA buttons */}
