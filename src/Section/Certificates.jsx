@@ -11,10 +11,10 @@ const CERTS = [
     img: "/certificates/july2025.webp",
   },
   {
-    title: "To be Input",
-    issuer: "soon",
-    date: "2024",
-    img: "/certificates/web-fundamentals.jpg",
+    title: "START UP 101 WORKSHOP",
+    issuer: "DICT",
+    date: "December 01, 2022",
+    img: "/certificates/startup101.jpg",
   },
   {
     title: "To be Input",
