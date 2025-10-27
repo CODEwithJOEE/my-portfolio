@@ -14,7 +14,7 @@ const CERTS = [
     title: "START UP 101 WORKSHOP",
     issuer: "DICT",
     date: "December 01, 2022",
-    img: "/certificates/startup101.jpg",
+    img: "/certificates/startup101.webp",
   },
   {
     title: "To be Input",
