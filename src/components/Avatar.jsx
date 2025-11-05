@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+/* This can be used in other page example:
+<Avatar src={profile.photo} alt={`${profile.name} avatar`} size="sm" ring={false} />
+<Avatar src={profile.photo} alt={`Portrait of ${profile.name}`} size="md" /> */
+
 export default function Avatar({
   src,
   alt,
