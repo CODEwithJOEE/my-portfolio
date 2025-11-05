@@ -1,45 +1,60 @@
 import { useState } from "react";
+import { MdEmail, MdContentCopy } from "react-icons/md";
+import {
+  FaPhone,
+  FaWhatsapp,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaDownload,
+} from "react-icons/fa";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
 
+  // Use icon components + brand colors
   const contacts = [
     {
       name: "Email",
-      icon: "/icons/gmail.webp",
-      // Prefill subject to look professional
+      icon: <MdEmail size={20} />,
+      color: "#EA4335", // Gmail red
       link: "mailto:joemarie27r@gmail.com?subject=Project%20Inquiry%20from%20Portfolio",
     },
     {
       name: "Phone",
-      icon: "/icons/phone-call.png",
+      icon: <FaPhone size={18} />,
+      color: "#16a34a", // green-ish
       link: "tel:+639073195155",
     },
     {
       name: "WhatsApp",
-      icon: "/icons/WhatsApp.webp",
+      icon: <FaWhatsapp size={18} />,
+      color: "#25D366",
       link: "https://wa.me/639073195155",
     },
-
     {
       name: "Facebook",
-      icon: "/icons/facebook.webp",
+      icon: <FaFacebook size={18} />,
+      color: "#1877F2",
       link: "https://www.facebook.com/joemarie.amante.ronday/",
     },
     {
       name: "Instagram",
-      icon: "/icons/instagram.webp",
+      icon: <FaInstagram size={18} />,
+      color: "#E4405F",
       link: "https://www.instagram.com/joemari_e69/?hl=de",
     },
     {
       name: "LinkedIn",
-      icon: "/icons/linkedin.png",
+      icon: <FaLinkedin size={18} />,
+      color: "#0A66C2",
       link: "https://ph.linkedin.com/in/joemarie-ronday-908a9a360",
     },
     {
       name: "Download vCard",
-      icon: "/icons/download.png",
-      link: "/files/joemarie-ronday.vcf", // ← place a .vcf in /public/files
+      icon: <FaDownload size={18} />,
+      color: "#0284C7",
+      link: "/files/joemarie-ronday.vcf", // place a .vcf in /public/files
       download: true,
     },
   ];
@@ -49,7 +64,9 @@ export default function Contact() {
       await navigator.clipboard.writeText("joemarie27r@gmail.com");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {}
+    } catch {
+      // silently fail
+    }
   };
 
   return (
@@ -64,32 +81,33 @@ export default function Contact() {
 
       {/* Contact chips */}
       <div className="flex flex-wrap gap-3">
-        {contacts.map((c) => (
-          <a
-            key={c.name}
-            href={c.link}
-            target="_blank"
-            rel="noopener noreferrer me"
-            download={c.download || undefined}
-            aria-label={c.name}
-            className="
-              inline-flex items-center gap-2 px-4 py-2 rounded-xl
-              border border-gray-200 dark:border-white/10
-              bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10
-              shadow-sm dark:shadow-none text-sm font-medium transition
-              focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
-              dark:focus:ring-offset-slate-900
-            "
-          >
-            <img
-              src={c.icon}
-              alt=""
-              className="w-5 h-5 object-contain"
-              loading="lazy"
-            />
-            <span>{c.name}</span>
-          </a>
-        ))}
+        {contacts.map((c) => {
+          const isDownload = Boolean(c.download);
+          return (
+            <a
+              key={c.name}
+              href={c.link}
+              // only open new tab for external links
+              target={isDownload ? undefined : "_blank"}
+              rel={isDownload ? undefined : "noopener noreferrer me"}
+              download={c.download || undefined}
+              aria-label={c.name}
+              className="
+                inline-flex items-center gap-2 px-4 py-2 rounded-xl
+                border border-gray-200 dark:border-white/10
+                bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10
+                shadow-sm dark:shadow-none text-sm font-medium transition
+                focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
+                dark:focus:ring-offset-slate-900
+              "
+            >
+              <span className="text-lg" style={{ color: c.color }}>
+                {c.icon}
+              </span>
+              <span>{c.name}</span>
+            </a>
+          );
+        })}
 
         {/* Copy email button */}
         <button
@@ -105,7 +123,7 @@ export default function Contact() {
           "
           aria-live="polite"
         >
-          <img src="/icons/copy.png" alt="" className="w-5 h-5" />
+          <MdContentCopy size={18} className="opacity-80" />
           {copied ? "Email copied!" : "Copy Email"}
         </button>
 

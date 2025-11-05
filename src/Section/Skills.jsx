@@ -1,50 +1,64 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  FaPhp,
+  FaJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaLaravel,
+  FaWordpress,
+  FaGithub,
+  FaFigma,
+} from "react-icons/fa";
+import { SiKotlin, SiMysql, SiSqlite, SiCanva, SiXampp } from "react-icons/si";
 
 export default function Skills() {
   const groups = [
     {
       title: "Languages",
       skills: [
-        { name: "PHP", icon: "/icons/php.png" },
-        { name: "JavaScript", icon: "/icons/javascript.png" },
-        { name: "Kotlin", icon: "/icons/kotlin.png" },
-        { name: "HTML", icon: "/icons/html.png" },
-        { name: "CSS", icon: "/icons/css.svg" },
+        { name: "PHP", icon: <FaPhp />, color: "#777BB4" },
+        { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
+        { name: "Kotlin", icon: <SiKotlin />, color: "#7F52FF" },
+        { name: "HTML", icon: <FaHtml5 />, color: "#E34F26" },
+        { name: "CSS", icon: <FaCss3Alt />, color: "#1572B6" },
       ],
     },
     {
       title: "Frameworks & Tools",
       skills: [
-        { name: "Laravel", icon: "/icons/laravel.svg" },
-        { name: "WordPress (themes & plugins)", icon: "/icons/wordpress.png" },
+        { name: "Laravel", icon: <FaLaravel />, color: "#FF2D20" },
+        {
+          name: "WordPress (themes & plugins)",
+          icon: <FaWordpress />,
+          color: "#21759B",
+        },
       ],
     },
     {
       title: "Databases",
       skills: [
-        { name: "MySQL", icon: "/icons/mysql.png" },
-        { name: "SQLite", icon: "/icons/sqlite.png" },
-        { name: "MySQL Workbench", icon: "/icons/mysql.svg" },
+        { name: "MySQL", icon: <SiMysql />, color: "#4479A1" },
+        { name: "SQLite", icon: <SiSqlite />, color: "#0D597F" },
       ],
     },
     {
       title: "Version Control & Collaboration",
-      skills: [{ name: "Git / GitHub", icon: "/icons/github.png" }],
+      skills: [{ name: "Git / GitHub", icon: <FaGithub />, color: "#181717" }],
     },
     {
       title: "UI/UX & Design",
       skills: [
-        { name: "Canva", icon: "/icons/canva.svg" },
-        { name: "Figma", icon: "/icons/figma.svg" },
+        { name: "Canva", icon: <SiCanva />, color: "#00C4CC" },
+        { name: "Figma", icon: <FaFigma />, color: "#F24E1E" },
       ],
     },
     {
       title: "Hosting & Deployment",
       skills: [
-        { name: "XAMPP", icon: "/icons/xampp.png" },
-        { name: "GitHub Pages", icon: "/icons/github.png" },
-        { name: "WordPress Hosting", icon: "/icons/wordpress.png" },
+        { name: "XAMPP", icon: <SiXampp />, color: "#FB7A24" },
+        { name: "GitHub Pages", icon: <FaGithub />, color: "#181717" },
+        { name: "WordPress Hosting", icon: <FaWordpress />, color: "#21759B" },
       ],
     },
     {
@@ -69,7 +83,7 @@ export default function Skills() {
     },
   ];
 
-  // ✅ Show exactly 6 per page (2 rows × 3 columns)
+  // ✅ Show exactly 4 groups per page
   const pageSize = 4;
   const [page, setPage] = useState(1);
 
@@ -106,16 +120,15 @@ export default function Skills() {
                 {group.skills.map((s) => (
                   <span
                     key={s.name}
-                    className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 px-3 py-1 text-sm bg-white/50 dark:bg-white/5"
+                    className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 px-3 py-1 text-sm bg-white/50 dark:bg-white/5 transition-all hover:scale-105 hover:shadow-sm"
                   >
                     {s.icon && (
-                      <img
-                        src={s.icon}
-                        alt={s.name}
-                        className="w-4 h-4 object-contain"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <span
+                        className="text-lg"
+                        style={{ color: s.color || "#6B7280" }}
+                      >
+                        {s.icon}
+                      </span>
                     )}
                     {s.name}
                   </span>
