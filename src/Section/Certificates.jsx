@@ -1,37 +1,10 @@
 // src/Section/Certificates.jsx
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { CERTS } from "../data/certificates";
+import CertCard from "../components/CertCard";
 
-// ---- data ----
-const CERTS = [
-  {
-    title: "Certificate of Excellence",
-    issuer: "OBI Services",
-    date: "July 2025",
-    img: "/certificates/july2025.webp",
-  },
-  {
-    title: "START UP 101 WORKSHOP",
-    issuer: "DICT",
-    date: "December 01, 2022",
-    img: "/certificates/startup101.webp",
-  },
-  {
-    title: "To be Input",
-    issuer: "soon",
-    date: "2024",
-    img: "/certificates/advanced-js.jpg",
-  },
-  {
-    title: "To be Input",
-    issuer: "soon",
-    date: "2023",
-    img: "/certificates/kotlin-basics.jpg",
-  },
-];
-
-// ---- main component ----
-function Certificates() {
+export default function Certificates() {
   const pageSize = 2;
   const [page, setPage] = useState(1);
 
@@ -39,6 +12,7 @@ function Certificates() {
   const start = (page - 1) * pageSize;
   const end = start + pageSize;
 
+  // CERTS is a static import; depend only on pagination indices
   const pageItems = useMemo(() => CERTS.slice(start, end), [start, end]);
 
   const go = (p) => setPage(Math.min(Math.max(1, p), totalPages));
@@ -58,6 +32,7 @@ function Certificates() {
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.22, ease: "easeOut" }}
           className="grid gap-4 sm:grid-cols-2"
+          aria-label={`Certificates page ${page} of ${totalPages}`}
         >
           {pageItems.map((c) => (
             <CertCard key={c.title + c.date} {...c} />
@@ -73,7 +48,10 @@ function Certificates() {
           <strong>{CERTS.length}</strong>
         </p>
 
-        <nav className="inline-flex items-center gap-2">
+        <nav
+          className="inline-flex items-center gap-2"
+          aria-label="Certificates pagination"
+        >
           <button
             onClick={() => go(page - 1)}
             disabled={page === 1}
@@ -111,78 +89,3 @@ function Certificates() {
     </div>
   );
 }
-
-// ---- card with click-to-zoom modal ----
-function CertCard({ title, issuer, date, img }) {
-  const [show, setShow] = useState(false);
-
-  return (
-    <>
-      <article
-        onClick={() => setShow(true)}
-        className="
-          rounded-2xl border border-gray-200 dark:border-white/10
-          bg-white dark:bg-white/5 shadow-sm dark:shadow-none
-          p-4 text-center cursor-pointer hover:bg-white/10 transition
-        "
-      >
-        <div className="mx-auto max-w-xs rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 bg-white/5">
-          <img
-            src={img}
-            alt={title}
-            className="w-full object-cover"
-            loading="lazy"
-            decoding="async"
-            onError={(e) => {
-              e.currentTarget.src = "/certificates/placeholder.jpg";
-            }}
-          />
-        </div>
-
-        <h3 className="mt-3 font-semibold">{title}</h3>
-        <p className="text-sm opacity-80">
-          Issued by {issuer} — {date}
-        </p>
-      </article>
-
-      <AnimatePresence>
-        {show && (
-          <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShow(false)}
-          >
-            <motion.div
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white dark:bg-slate-900 p-4 rounded-2xl max-w-3xl w-[90%] text-center shadow-lg"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-            >
-              <img
-                src={img}
-                alt={title}
-                className="w-full rounded-xl mb-3"
-                loading="lazy"
-              />
-              <h3 className="text-lg font-semibold">{title}</h3>
-              <p className="text-sm opacity-80">
-                Issued by {issuer} — {date}
-              </p>
-              <button
-                onClick={() => setShow(false)}
-                className="mt-4 px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white"
-              >
-                Close
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
-}
-
-export default Certificates;

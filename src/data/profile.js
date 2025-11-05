@@ -1,4 +1,3 @@
-// /data/profile.js
 export const profile = {
   name: "Joemarie",
   role: "Front-end Web Developer",

@@ -3,105 +3,15 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import MetricCard from "../components/MetricCard";
 
-const STATUS_STYLES = {
-  Completed:
-    // Light: solid emerald + subtle dark ring
-    // Dark: solid emerald + subtle white ring
-    "bg-emerald-600 text-white shadow-sm ring-1 ring-black/10 " +
-    "dark:bg-emerald-500 dark:text-white dark:ring-white/15",
-
-  Ongoing:
-    "bg-amber-600 text-white shadow-sm ring-1 ring-black/10 " +
-    "dark:bg-amber-500 dark:text-white dark:ring-white/15",
-
-  Live:
-    "bg-sky-600 text-white shadow-sm ring-1 ring-black/10 " +
-    "dark:bg-sky-500 dark:text-white dark:ring-white/15",
-};
-
-const TECH_STYLES = {
-  HTML:
-    "bg-orange-100 text-orange-800 border border-orange-200 " +
-    "dark:bg-orange-500/15 dark:text-orange-300 dark:border-orange-400/20",
-  CSS:
-    "bg-blue-100 text-blue-800 border border-blue-200 " +
-    "dark:bg-blue-500/15 dark:text-blue-300 dark:border-blue-400/20",
-  JavaScript:
-    "bg-yellow-100 text-yellow-900 border border-yellow-200 " +
-    "dark:bg-yellow-500/15 dark:text-yellow-200 dark:border-yellow-400/20",
-  MySQL:
-    "bg-cyan-100 text-cyan-800 border border-cyan-200 " +
-    "dark:bg-cyan-500/15 dark:text-cyan-300 dark:border-cyan-400/20",
-  Kotlin:
-    "bg-indigo-100 text-indigo-800 border border-indigo-200 " +
-    "dark:bg-indigo-500/15 dark:text-indigo-300 dark:border-indigo-400/20",
-  SQLite:
-    "bg-teal-100 text-teal-800 border border-teal-200 " +
-    "dark:bg-teal-500/15 dark:text-teal-300 dark:border-teal-400/20",
-  WordPress:
-    "bg-sky-100 text-sky-900 border border-sky-200 " +
-    "dark:bg-sky-500/15 dark:text-sky-300 dark:border-sky-400/20",
-  PHP:
-    "bg-violet-100 text-violet-900 border border-violet-200 " +
-    "dark:bg-violet-500/15 dark:text-violet-300 dark:border-violet-400/20",
-};
-
-const projects = [
-  {
-    title: "Coffee Shop Website",
-    status: "Completed",
-    img: "/projects/Coffee-Shop.jpg",
-    desc: "A business site for a coffee shop with menu pages and basic ordering forms. Built with PHP, JavaScript, HTML & CSS. Data stored in MySQL.",
-    techs: ["PHP", "JavaScript", "MySQL"],
-    live: "https://github.com/CODEwithJOEE",
-  },
-  {
-    title: "Milk Tea Shop Website",
-    status: "Completed",
-    img: "/projects/Boba-Bliss.avif",
-    desc: "Brand website for a milk tea shop including product catalog and contact form. Built with PHP, JavaScript, HTML & CSS with a MySQL database.",
-    techs: ["PHP", "JavaScript", "MySQL"],
-    live: "https://github.com/CODEwithJOEE",
-  },
-  {
-    title: "Disaster Master 2.0 (Kotlin)",
-    status: "Completed",
-    img: "/projects/Disaster-Master.png",
-    desc: "A Kotlin app showing disasters… Tagalog/English/Bisaya support and before/after videos.",
-    techs: ["Kotlin", "SQLite"],
-    live: "https://github.com/CODEwithJOEE",
-  },
-  {
-    title: "Client Portfolio Website Project",
-    status: "Live",
-    img: "/projects/myprofilewebsite.png",
-    desc: "A portfolio website showcasing projects and skills. Built with HTML, CSS and JavaScript.",
-    techs: ["HTML", "CSS", "JavaScript"],
-    live: "https://codewithjoee.github.io/MyWebsiteProfile/",
-  },
-  {
-    title: "Sample Portfolio Website Project",
-    status: "Live",
-    img: "/projects/profilewebsite.jpg",
-    desc: "A sample profile website showcasing projects, about, education, experience, and skills.",
-    techs: ["HTML", "CSS", "JavaScript"],
-    live: "https://codewithjoee.github.io/WebsiteProfile2.0/",
-  },
-  {
-    title: "OBI Services Corporate Website",
-    status: "Ongoing",
-    img: "/projects/OBI-Homepage.png",
-    desc: "Corporate site work including SEO optimization, UI improvements, content updates, and performance enhancements.",
-    techs: ["WordPress", "PHP", "JavaScript", "HTML", "CSS"],
-    live: "https://obi.services/",
-  },
-];
+import { projects } from "../data/projects";
+import { STATUS_STYLES } from "../data/projectStatusStyles";
+import { TECH_STYLES } from "../data/projectTechStyles";
 
 export default function Projects() {
   const [page, setPage] = useState(1);
   const pageSize = 2;
 
-  // ✅ project stats for MetricCards
+  // Stats
   const totals = useMemo(() => {
     const total = projects.length;
     const completed = projects.filter((p) => p.status === "Completed").length;
@@ -122,7 +32,7 @@ export default function Projects() {
     <div>
       <h2 className="text-2xl md:text-3xl font-bold">Projects</h2>
 
-      {/* ✅ Stats row (animated MetricCards) */}
+      {/* Stats */}
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <MetricCard kpi={`${totals.total}`} label="Total" />
         <MetricCard kpi={`${totals.completed}`} label="Completed" />
@@ -146,7 +56,7 @@ export default function Projects() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Pagination (unchanged) */}
+      {/* Pagination */}
       <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <p className="text-sm opacity-80">
           Showing <strong>{start + 1}</strong>–
@@ -163,7 +73,6 @@ export default function Projects() {
             Prev
           </button>
 
-          {/* numbered buttons */}
           <div className="inline-flex items-center gap-1">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
               <button

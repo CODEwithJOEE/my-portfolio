@@ -2,23 +2,9 @@ import { Mail, Github, Linkedin, Facebook } from "lucide-react";
 import { profile } from "../data/profile";
 import useTypewriter from "../hooks/useTypewriter";
 import useAge from "../hooks/useAge";
-
-const TECH_COLORS = {
-  HTML: "text-orange-500 dark:text-orange-300",
-  CSS: "text-blue-500 dark:text-blue-300",
-  JavaScript: "text-yellow-500 dark:text-yellow-200",
-  Kotlin: "text-indigo-500 dark:text-indigo-300",
-  PHP: "text-violet-500 dark:text-violet-300",
-  React: "text-cyan-500 dark:text-cyan-300",
-};
-const TECH_CURSOR = {
-  HTML: "border-orange-500 dark:border-orange-300",
-  CSS: "border-blue-500 dark:border-blue-300",
-  JavaScript: "border-yellow-500 dark:border-yellow-200",
-  Kotlin: "border-indigo-500 dark:border-indigo-300",
-  PHP: "border-violet-500 dark:border-violet-300",
-  React: "border-cyan-500 dark:border-cyan-300",
-};
+import { TECH_COLORS, TECH_CURSOR } from "../data/techStyles";
+import ActionPill from "./ActionPill";
+import Avatar from "./Avatar";
 
 export default function Sidebar({ onSelectContact }) {
   const typed = useTypewriter(profile.techRotation, {
@@ -32,15 +18,14 @@ export default function Sidebar({ onSelectContact }) {
   return (
     <aside className="rounded-2xl bg-transparent">
       <div className="space-y-4">
-        <div className="aspect-square overflow-hidden rounded-full ring-2 ring-white/10 flex items-center justify-center">
-          <img
+        {/* ✅ Avatar component */}
+        <div className="aspect-square flex items-center justify-center">
+          <Avatar
             src={profile.photo}
             alt={`Portrait of ${profile.name}`}
-            loading="lazy"
-            decoding="async"
-            width="640"
-            height="640"
-            className="h-full w-full object-cover object-top rounded-full scale-105"
+            size="full"
+            ring
+            className="scale-105"
           />
         </div>
 
@@ -70,40 +55,23 @@ export default function Sidebar({ onSelectContact }) {
           />
         </p>
 
+        {/* contact & socials */}
         <div className="flex items-center gap-2 flex-wrap">
-          <button
-            onClick={onSelectContact}
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
-          >
-            <Mail size={16} /> {profile.ctas.contact}
-          </button>
+          <ActionPill as="button" onClick={onSelectContact} Icon={Mail}>
+            {profile.ctas.contact}
+          </ActionPill>
 
-          <a
-            href={profile.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
-          >
-            <Github size={16} /> {profile.ctas.github}
-          </a>
+          <ActionPill href={profile.links.github} Icon={Github}>
+            {profile.ctas.github}
+          </ActionPill>
 
-          <a
-            href={profile.links.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
-          >
-            <Linkedin size={16} /> {profile.ctas.linkedin}
-          </a>
+          <ActionPill href={profile.links.linkedin} Icon={Linkedin}>
+            {profile.ctas.linkedin}
+          </ActionPill>
 
-          <a
-            href={profile.links.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-black/5 dark:hover:bg-white/5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50"
-          >
-            <Facebook size={16} /> {profile.ctas.facebook}
-          </a>
+          <ActionPill href={profile.links.facebook} Icon={Facebook}>
+            {profile.ctas.facebook}
+          </ActionPill>
         </div>
 
         <div className="space-y-1">

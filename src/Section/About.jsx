@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MetricCard from "../components/MetricCard";
 
 export default function About({ onNavigate }) {
