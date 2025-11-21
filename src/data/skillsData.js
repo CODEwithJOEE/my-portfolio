@@ -8,9 +8,17 @@ import {
   FaFigma,
   FaReact,
 } from "react-icons/fa";
-import { SiVite, SiTailwindcss, SiVercel } from "react-icons/si";
 
-import { SiKotlin, SiMysql, SiSqlite, SiCanva, SiXampp } from "react-icons/si";
+import {
+  SiKotlin,
+  SiMysql,
+  SiSqlite,
+  SiCanva,
+  SiXampp,
+  SiVite,
+  SiTailwindcss,
+  SiVercel,
+} from "react-icons/si";
 
 export const skillsGroups = [
   {
